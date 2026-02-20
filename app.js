@@ -55,14 +55,14 @@ document.addEventListener('DOMContentLoaded', async () => {
             }
         });
 
-        initGraph(corporaData, datasetsData);
+        initGraph(corporaData, datasetsData, relationshipsData);
 
     } catch (err) {
         console.error('Error loading data:', err);
     }
 });
 
-function initGraph(corporaData, datasetsData) {
+function initGraph(corporaData, datasetsData, relationshipsData) {
     // 1. Prepare elements (nodes)
     const elements = [];
     const years = new Set();
@@ -106,6 +106,46 @@ function initGraph(corporaData, datasetsData) {
             // Prefix to avoid ID collisions with corpora if names overlap
             elements.push({
                 data: { id: `ds_${d.Dataset}`, label: d.Dataset, year: res.year, type: 'dataset' }
+            });
+        }
+    });
+
+    // Create a Set of valid node IDs for quick lookup
+    const validIds = new Set(elements.map(e => e.data.id));
+
+    // Process relationships
+    relationshipsData.forEach(r => {
+        if (!r.Source || !r.Target) return;
+
+        let sourceId, targetId;
+
+        // Determine Source ID
+        if (r['Relationship Type'] && r['Relationship Type'].startsWith('Dataset')) {
+             sourceId = `ds_${r.Source}`;
+        } else {
+             sourceId = r.Source;
+        }
+
+        // Determine Target ID
+        if (r['Relationship Type'] && r['Relationship Type'].endsWith('Dataset')) {
+             targetId = `ds_${r.Target}`;
+        } else {
+             targetId = r.Target;
+        }
+
+        // Check if nodes exist
+        // Note: Sometimes a dataset might be referred to without 'ds_' prefix in relation if type is mixed, 
+        // or a corpus might be missing. We try to be robust.
+
+        if (validIds.has(sourceId) && validIds.has(targetId)) {
+            elements.push({
+                data: {
+                    id: `${sourceId}-${targetId}`,
+                    source: sourceId,
+                    target: targetId,
+                    language: r['Language Content'],
+                    speechType: r['Speech Type']
+                }
             });
         }
     });
@@ -196,6 +236,54 @@ function initGraph(corporaData, datasetsData) {
                     'height': 20,
                     'padding': 5,
                     'shape': 'rectangle'
+                }
+            },
+            // Edge styles
+            {
+                selector: 'edge',
+                style: {
+                    'width': 2,
+                    'curve-style': 'bezier',
+                    'target-arrow-shape': 'triangle'
+                }
+            },
+            {
+                selector: 'edge[language="English"]',
+                style: {
+                    'line-style': 'solid'
+                }
+            },
+            {
+                selector: 'edge[language="Non-English"]',
+                style: {
+                    'line-style': 'dashed'
+                }
+            },
+            {
+                selector: 'edge[language="English & Non-English"]',
+                style: {
+                    'line-style': 'dotted'
+                }
+            },
+            {
+                selector: 'edge[speechType="Real Speech"]',
+                style: {
+                    'line-color': '#6c8ebf',
+                    'target-arrow-color': '#6c8ebf'
+                }
+            },
+            {
+                selector: 'edge[speechType="DF Speech"]',
+                style: {
+                    'line-color': '#e6b800', // Darker yellow for visibility
+                    'target-arrow-color': '#e6b800'
+                }
+            },
+            {
+                selector: 'edge[speechType="Real & DF Speech"]',
+                style: {
+                    'line-color': 'green',
+                    'target-arrow-color': 'green'
                 }
             }
         ],

@@ -16,16 +16,16 @@ AD for SFR,2022,public,5,1,181764,585,CC BY 4.0
 ADD challenge 1,2022,public,N/A,1,493123,80 (40+40),CC BY-NC-ND 4.0
 CFAD,2022,public,11,1,347514,1212,CC BY 4.0
 F&M,2022,public,1,2,3522,160,N/A
-In-the-wild,2022,public,N/A,1,31752,58,Apache 2.0
+In-the-Wild,2022,public,N/A,1,31752,58,Apache 2.0
 ADD challenge 2,2023,public,N/A,1,517068,1030,CC BY-NC-ND 4.0
 DECRO,2023,public,10,2,118382,2839,CC BY 4.0
 LibriTTS-DF,2023,restricted,6,1,N/A,N/A,N/A
 PartialSpoof v1.2,2023,public,9,1,121461,107 (46+61),CC BY 4.0
 TIMIT-TTS,2023,public,12,1,79120,69 (38+31),CC BY 4.0
-Voc.v2 v3 v4,2023,public,4,1,10320,20 (8+12),ODC-By
-MLAAD (v9),2024,public,140,51,298000,N/A,CC BY-NC 4.0
+"Voc.v2,v3,v4",2023,public,4,1,10320,20 (8+12),ODC-By
+MLAAD,2024,public,140,51,298000,N/A,CC BY-NC 4.0
 CodecFake,2024,public,15,1,90797,109 (47+62),CC BY 4.0
-Codecfake (big),2024,public,7,2,1058166,328,CC BY-NC-ND 4.0
+Codecfake,2024,public,7,2,1058166,328,CC BY-NC-ND 4.0
 CVoiceFake,2024,public,6,5,1254893,N/A,CC BY 4.0
 Diffuse or Confuse,2024,public,12,1,183400,1 (0+1),CC BY 4.0
 MLADDC,2024,public,2,20,400000,N/A,CC BY 4.0
