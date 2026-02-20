@@ -34,7 +34,6 @@ DAPS,VCC 2016,Corpus->Dataset,English,Real Speech
 DAPS,VCC 2018,Corpus->Dataset,English,Real Speech
 EMIME,VCC 2020,Corpus->Dataset,English,Real Speech
 FMFCC-A,DECRO,Dataset->Dataset,Non-English,DF Speech
-FMFCC-A,FMFCC-A,Dataset->Dataset,English,Unknown Speech
 JSUT,WaveFake,Corpus->Dataset,Non-English,Real Speech
 LJ Speech,Diffuse or Confuse,Corpus->Dataset,English,Real Speech
 LJ Speech,FoR,Corpus->Dataset,English,Real Speech
@@ -50,8 +49,8 @@ M-AILABS,MLAAD,Corpus->Dataset,Non-English,Real Speech
 MLS,ASVspoof 5,Corpus->Dataset,English,Real Speech
 MLS,ASVspoof 5,Corpus->Dataset,English,Real Speech
 Magic Data,VoiceWukong,Unknown->Dataset,Non-English,Real Speech
-Magic Data,CFAD,Unknown->Dataset,Non-English,DF Speech
-self-recorded,CFAD,Unknown->Dataset,Non-English,DF Speech
+Magic Data,CFAD,Unknown->Dataset,Non-English,Real Speech
+self-recorded,CFAD,Unknown->Dataset,Non-English,Real Speech
 MuTox,SynHate,Corpus->Dataset,Non-English,Real Speech
 PartialSpoof v1.2,PartialEdit,Dataset->Dataset,English,DF Speech
 THCHS-30,AD for SFR,Corpus->Dataset,Non-English,Real Speech
@@ -81,4 +80,4 @@ VoxPopuli,SCDF,Corpus->Dataset,Non-English,Real Speech
 lecture_tts,MC-TTS,Corpus->Dataset,Non-English,Real Speech
 self-collected,FMFCC-A,Unknown->Dataset,Non-English,Real Speech
 "social media, internet 2024",AI4T,Unknown->Dataset,Non-English,Real & DF Speech
-"social media, internet 2022",In-the-Wild,Corpus->Dataset,Non-English,Real Speech
+"social media, internet 2022",In-the-Wild,Corpus->Dataset,Non-English,Real & DF Speech
