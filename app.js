@@ -84,19 +84,60 @@ document.addEventListener('DOMContentLoaded', async () => {
         });
 
         // --- Reset Button ---
-        document.getElementById('resetBtn').addEventListener('click', () => {
-            document.getElementById('searchBox').value = '';
-            table.clearFilter();
-            table.clearHeaderFilter();
-            
-            cy.batch(() => {
-                cy.nodes().removeClass('hidden');
-                cy.edges().removeClass('hidden');
-            });
-
-            cy.fit(); 
-            cy.center();
-        });
+        const resetAll = () => {
+             document.getElementById('searchBox').value = '';
+             table.clearFilter();
+             table.clearHeaderFilter();
+             
+             cy.batch(() => {
+                 cy.elements().removeClass('hidden').removeClass('dimmed').removeClass('highlighted');
+             });
+ 
+             cy.fit(); 
+             cy.center();
+         };
+ 
+         document.getElementById('resetBtn').addEventListener('click', resetAll);
+ 
+         // --- Graph Interaction ---
+         cy.on('tap', (e) => {
+             if (e.target === cy) {
+                 // Clicked on background
+                 resetAll();
+                 return;
+             }
+ 
+             const node = e.target;
+             if (!node.isNode()) return;
+ 
+             // Clear search box if graph interaction happens
+             document.getElementById('searchBox').value = '';
+             
+             cy.batch(() => {
+                 // Reset styles first
+                 cy.elements().removeClass('highlighted').addClass('dimmed').removeClass('hidden');
+ 
+                 // Get neighborhood (connected edges and nodes)
+                 const neighborhood = node.neighborhood().add(node);
+                 
+                 // Apply highlighted class
+                 neighborhood.removeClass('dimmed').addClass('highlighted');
+ 
+                 // Filter Table to show connected datasets
+                 // Find all dataset nodes in the selection (either the node itself or neighbors)
+                 const connectedDatasetNodes = neighborhood.filter('node[type="dataset"]');
+                 const datasetNames = connectedDatasetNodes.map(n => n.data('label'));
+                 
+                 if (datasetNames.length > 0) {
+                      table.setFilter(function(data){
+                         return datasetNames.includes(data.Dataset);
+                     });
+                 } else {
+                     // If selection has no datasets (e.g. isolated corpus?), hide all rows
+                     table.setFilter(() => false); 
+                 }
+             });
+         });
 
     } catch (err) {
         console.error('Error loading data:', err);
@@ -332,6 +373,20 @@ function initGraph(corporaData, datasetsData, relationshipsData) {
                 style: {
                     'display': 'none'
                 }
+            },
+            {
+                selector: '.dimmed',
+                style: {
+                    'opacity': 0.2
+                }
+            },
+            {
+                selector: '.highlighted',
+                style: {
+                    'opacity': 1,
+                    'font-weight': 'bold',
+                    'border-width': 3
+                }
             }
         ],
         layout: {
@@ -384,4 +439,6 @@ function initGraph(corporaData, datasetsData, relationshipsData) {
     
     cy.fit();
     cy.center();
+    
+    return cy;
 }

@@ -5,7 +5,7 @@ AISHELL-1,ADD challenge 1,Corpus->Dataset,Non-English,Real Speech
 AISHELL-1,ADD challenge 2,Corpus->Dataset,Non-English,Real Speech
 AISHELL-1,CFAD,Corpus->Dataset,Non-English,Real Speech
 AISHELL-1,DECRO,Corpus->Dataset,Non-English,Real Speech
-AISHELL-1,SYNSPEECHDDB,Corpus->Dataset,Non-English,Real Speech
+AISHELL-1,SynSpeechDDB,Corpus->Dataset,Non-English,Real Speech
 AISHELL-1,SpeechFake,Corpus->Dataset,Non-English,Real Speech
 AISHELL-2,DECRO,Corpus->Dataset,Non-English,Real Speech
 AISHELL-3,AD for SFR,Corpus->Dataset,Non-English,Real Speech
@@ -14,14 +14,14 @@ AISHELL-3,ADD challenge 2,Corpus->Dataset,Non-English,Real Speech
 AISHELL-3,CFAD,Corpus->Dataset,Non-English,Real Speech
 AISHELL-3,Codecfake,Corpus->Dataset,Non-English,Real Speech
 AISHELL-3,DECRO,Corpus->Dataset,Non-English,Real Speech
-AISHELL-3,Half-Truth,Corpus->Dataset,Non-English,Real Speech
+AISHELL-3,Half-Truth (HAD),Corpus->Dataset,Non-English,Real Speech
 AISHELL-3,SpeechFake,Corpus->Dataset,Non-English,Real Speech
 AISHELL-4,ADD challenge 1,Corpus->Dataset,Non-English,Real Speech
 ASVspoof 2019 LA,DECRO,Dataset->Dataset,English,Real Speech
 ASVspoof 2019 LA,PartialSpoof v1.2,Dataset->Dataset,English,Real Speech
 ASVspoof 2019 LA,"Voc.v2,v3,v4",Dataset->Dataset,English,Real Speech
-Aidatatang_200zh,AD for SFR,Unknown->Dataset,Non-English,Real Speech
-Aidatatang_200zh,DECRO,Unknown->Dataset,Non-English,Real Speech
+Aidatang_200zh,AD for SFR,Unknown->Dataset,Non-English,Real Speech
+Aidatang_200zh,DECRO,Unknown->Dataset,Non-English,Real Speech
 Magic Data,DECRO,Unknown->Dataset,Non-English,Real Speech
 freeST,DECRO,Unknown->Dataset,Non-English,Real Speech
 CFAD,DECRO,Dataset->Dataset,Non-English,DF Speech
@@ -29,6 +29,7 @@ CMU Arctic,Fake or Real,Corpus->Dataset,English,Real Speech
 Common Voice,F&M,Corpus->Dataset,English,Real Speech
 Common Voice,SpeechFake,Corpus->Dataset,English & Non-English,Real Speech
 Common Voice,VCTK,Corpus->Corpus,English,Real Speech
+Common Voice,CVoiceFake,Corpus->Dataset,English & Non-English,Real Speech
 DAPS,VCC 2016,Corpus->Dataset,English,Real Speech
 DAPS,VCC 2018,Corpus->Dataset,English,Real Speech
 EMIME,VCC 2020,Corpus->Dataset,English,Real Speech
@@ -44,6 +45,7 @@ LibriSpeech,TIMIT-TTS,Corpus->Dataset,English,Real Speech
 LibriTTS,Codecfake,Corpus->Dataset,English,Real Speech
 LibriTTS,SpeechFake,Corpus->Dataset,English,Real Speech
 LibriTTS,"Voc.v2,v3,v4",Corpus->Dataset,English,Real Speech
+LibriTTS,LibriTTS-DF,Corpus->Dataset,English,Real Speech
 M-AILABS,MLAAD,Corpus->Dataset,Non-English,Real Speech
 MLS,ASVspoof 5,Corpus->Dataset,English,Real Speech
 MLS,ASVspoof 5,Corpus->Dataset,English,Real Speech
@@ -60,16 +62,17 @@ VCC 2018,ASVspoof 2021 DF,Dataset->Dataset,English,DF Speech
 VCC 2018,ASVspoof 2021 LA,Dataset->Dataset,English,DF Speech
 VCC 2018,Sprocket-VC,Dataset->Dataset,English,Real Speech
 VCC 2020,ASVspoof 2021 DF,Dataset->Dataset,English,DF Speech
+VCC 2020,ASVspoof 2021 LA,Dataset->Dataset,English,DF Speech
 VCTK,ASVspoof 2019 LA,Corpus->Dataset,English,Real Speech
 VCTK,ASVspoof 2021 LA,Corpus->Dataset,English,Real Speech
 VCTK,ASVspoof 2021 DF,Corpus->Dataset,English,Real Speech
 VCTK,CodecFake,Corpus->Dataset,English,Real Speech
 VCTK,Codecfake,Corpus->Dataset,English,Real Speech
 VCTK,DFADD,Corpus->Dataset,English,Real Speech
-VCTK,MLAAD,Corpus->Dataset,Non-English,Real Speech
+VCTK,MLAAD,Corpus->Dataset,English,Real Speech
 VCTK,PartialEdit,Corpus->Dataset,English,Real Speech
 VCTK,STOPA,Corpus->Dataset,English,Real Speech
-VCTK,SYNSPEECHDDB,Corpus->Dataset,English,Real Speech
+VCTK,SynSpeechDDB,Corpus->Dataset,English,Real Speech
 VCTK,SpeechFake,Corpus->Dataset,English,Real Speech
 VCTK,TIMIT-TTS,Corpus->Dataset,English,Real Speech
 VCTK,VoiceWukong,Corpus->Dataset,English,Real Speech
