@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             id: row.Dataset // Add ID for Tabulator if needed, though mostly for tracking
         }));
 
-        new Tabulator("#table", {
+        const table = new Tabulator("#table", {
             data: tableData,
             layout: "fitColumns",
             height: "100%",
@@ -37,25 +37,66 @@ document.addEventListener('DOMContentLoaded', async () => {
             ],
         });
 
+        // Initialize Graph
+        const cy = initGraph(corporaData, datasetsData, relationshipsData);
+
         // --- Search Functionality ---
-        const table = Tabulator.findTable("#table")[0];
         document.getElementById('searchBox').addEventListener('input', (e) => {
-            const value = e.target.value;
+            const value = e.target.value.toLowerCase();
+            
             if (value) {
-                table.setFilter([
-                    [
-                        { field: "Dataset", type: "like", value: value },
-                        { field: "Year", type: "like", value: value },
-                        { field: "Accessibility", type: "like", value: value },
-                        { field: "License", type: "like", value: value },
-                    ]
-                ]);
+                // Filter Table
+                table.setFilter(function(data){
+                    return Object.values(data).some(val => 
+                        String(val).toLowerCase().includes(value)
+                    );
+                });
+
+                // Filter Graph
+                cy.batch(() => {
+                    cy.nodes().removeClass('hidden'); 
+                    cy.edges().removeClass('hidden');
+
+                    const matchingDatasets = table.getData("active").map(row => row.Dataset);
+                    
+                    // Hide non-matching datasets
+                    cy.nodes('[type="dataset"]').forEach(node => {
+                        if (!matchingDatasets.includes(node.data('label'))) {
+                            node.addClass('hidden');
+                        }
+                    });
+                    
+                    // Hide edges connected to hidden nodes
+                    cy.edges().forEach(edge => {
+                        if (edge.source().hasClass('hidden') || edge.target().hasClass('hidden')) {
+                            edge.addClass('hidden');
+                        }
+                    });
+                });
+
             } else {
                 table.clearFilter();
+                cy.batch(() => {
+                     cy.nodes().removeClass('hidden');
+                     cy.edges().removeClass('hidden');
+                });
             }
         });
 
-        initGraph(corporaData, datasetsData, relationshipsData);
+        // --- Reset Button ---
+        document.getElementById('resetBtn').addEventListener('click', () => {
+            document.getElementById('searchBox').value = '';
+            table.clearFilter();
+            table.clearHeaderFilter();
+            
+            cy.batch(() => {
+                cy.nodes().removeClass('hidden');
+                cy.edges().removeClass('hidden');
+            });
+
+            cy.fit(); 
+            cy.center();
+        });
 
     } catch (err) {
         console.error('Error loading data:', err);
@@ -284,6 +325,12 @@ function initGraph(corporaData, datasetsData, relationshipsData) {
                 style: {
                     'line-color': 'green',
                     'target-arrow-color': 'green'
+                }
+            },
+            {
+                selector: '.hidden',
+                style: {
+                    'display': 'none'
                 }
             }
         ],
