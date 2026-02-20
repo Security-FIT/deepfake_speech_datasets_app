@@ -1,0 +1,64 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Tabulator (table) -->
+  <link href="https://unpkg.com/tabulator-tables@6.2.5/dist/css/tabulator.min.css" rel="stylesheet">
+  <script src="https://unpkg.com/tabulator-tables@6.2.5/dist/js/tabulator.min.js"></script>
+
+  <!-- Cytoscape (graph) -->
+  <script src="https://unpkg.com/cytoscape@3.28.1/dist/cytoscape.min.js"></script>
+  
+  <!-- PapaParse -->
+  <script src="https://unpkg.com/papaparse@5.4.1/papaparse.min.js"></script>
+  <!-- Dagre (required for cytoscape-dagre) -->
+  <script src="https://unpkg.com/dagre@0.8.5/dist/dagre.min.js"></script>
+  <script src="https://unpkg.com/cytoscape-dagre@2.5.0/cytoscape-dagre.js"></script>
+  <script src="app.js" defer></script>
+</head>
+<body class="bg-slate-50 text-slate-900 h-screen flex flex-col overflow-hidden">
+  <div class="flex-1 flex flex-col p-4 w-full h-full">
+    <header class="mb-4 flex-none">
+      <h1 class="text-2xl font-semibold">Deepfake Speech Dataset Audit</h1>
+      <p class="text-sm text-slate-600">
+        Documentation-based audit. Provenance map indicates potential confounds, not ground-truth overlap quantification.
+      </p>
+      <div class="mt-2 flex gap-2">
+        <button id="resetBtn" class="px-3 py-1 rounded-lg bg-slate-900 text-white text-sm">Reset</button>
+        <a class="px-3 py-1 rounded-lg bg-white border text-sm" href="datasets.csv" download>Download CSV</a>
+      </div>
+    </header>
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 flex-1 min-h-0">
+      <div class="bg-white rounded-2xl shadow p-4 flex flex-col h-full min-h-0">
+        <div class="flex items-center gap-2 mb-2 flex-none">
+          <input id="searchBox" class="w-full border rounded-lg px-3 py-2 text-sm"
+                 placeholder="Search datasets (name, year, license, etc.)" />
+        </div>
+        <div id="table" class="flex-1 w-full relative"></div>
+      </div>
+
+      <div class="bg-white rounded-2xl shadow p-4 flex flex-col h-full min-h-0 relative">
+        <div class="text-sm text-slate-600 mb-2 flex-none flex justify-between items-center">
+            <span>Provenance overlap map</span>
+            <div class="flex items-center gap-4 text-xs flex-wrap justify-end">
+                <div class="flex items-center gap-1 border border-slate-400 bg-[#dae8fc] px-2 rounded">Speech corpus</div>
+                <div class="flex items-center gap-1 border border-yellow-600 bg-[#fff2cc] px-2 rounded">DF dataset</div>
+                <div class="flex items-center gap-1"><div class="w-6 h-0 border-t-2 border-black"></div>English data</div>
+                <div class="flex items-center gap-1"><div class="w-6 h-0 border-t-2 border-black border-dashed"></div>Non-English data</div>
+                <div class="flex items-center gap-1"><div class="w-6 h-0 border-t-2 border-[#6c8ebf]"></div>Real speech</div>
+                <div class="flex items-center gap-1"><div class="w-6 h-0 border-t-2 border-[#d79b00]"></div>DF speech</div>
+                <div class="flex items-center gap-1"><div class="w-6 h-0 border-t-2 border-[#82b366]"></div>Real & DF speech</div>
+            </div>
+        </div>
+        <div id="cy" class="w-full flex-1 border rounded-xl relative"></div>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
