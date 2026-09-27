@@ -1,4 +1,6 @@
 document.addEventListener('DOMContentLoaded', async () => {
+    trackVisit();
+
     try {
         const [corporaRes, datasetsRes, relationshipsRes] = await Promise.all([
             fetch('corpora.csv'),
@@ -143,6 +145,17 @@ document.addEventListener('DOMContentLoaded', async () => {
         console.error('Error loading data:', err);
     }
 });
+
+function trackVisit() {
+    const counterUrl = window.GOATCOUNTER_URL;
+    if (!counterUrl) return;
+
+    const script = document.createElement('script');
+    script.async = true;
+    script.src = 'https://gc.zgo.at/count.js';
+    script.dataset.goatcounter = counterUrl;
+    document.head.appendChild(script);
+}
 
 function initGraph(corporaData, datasetsData, relationshipsData) {
     // 1. Prepare elements (nodes)
